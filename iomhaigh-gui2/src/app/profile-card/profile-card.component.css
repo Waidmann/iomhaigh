@@ -1,0 +1,7 @@
+.link-table {
+    border: none;
+}
+
+.link-table tr td {
+    padding: 5px;
+}

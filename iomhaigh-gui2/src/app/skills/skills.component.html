@@ -1,0 +1,11 @@
+<ul>
+    <ng-template #recursiveList let-list>
+        <li *ngFor="let skill of skills">
+            {{skill.name}}
+            <ul *ngIf="skill.children.length > 0">
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: skill.children }"></ng-container>
+            </ul>
+        </li>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: skills }"></ng-container>
+</ul>
