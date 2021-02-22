@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    working_directory: /
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: Build api
+          command: |
+            docker build . -t iomhaigh-api -f iomhaigh-api/iomhaigh-api/Dockerfile
+      - run:
+          name: Build gui
+          command: |
+            docker build . -t iomhaigh-gui -f iomhaigh-gui/Dockerfile
+      - run:
+          name: Docker compose
+          command: |
+            docker-compose up
