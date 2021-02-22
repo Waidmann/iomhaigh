@@ -16,7 +16,9 @@ services:
       - 3306:3306
 
   iomhaigh-api:
-    build: ./iomhaigh-api/iomhaigh-api
+    build: 
+        context: ./iomhaigh-api/iomhaigh-api
+        dockerfile: Dockerfile
     container_name: iomhaigh-api
     environment:
       - DB_SERVER=iomhaigh-db
@@ -29,7 +31,9 @@ services:
       - iomhaigh-db
 
   iomhaigh-gui:
-    build: ./iomhaigh-gui
+    build: 
+        context: ./iomhaigh-gui
+        dockerfile: Dockerfile
     container_name: iomhaigh-gui
     ports:
       - 80:80
