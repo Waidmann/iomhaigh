@@ -1,9 +1,10 @@
 version: 2
 jobs:
   build:
-    working_directory: /tmp
+    working_directory: /circle-ci
     docker:
       - image: docker:17.05.0-ce-git
+      - image: mysql:5.7
     steps:
       - checkout
       - setup_remote_docker
