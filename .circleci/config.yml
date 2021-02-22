@@ -14,8 +14,12 @@ jobs:
           command: docker -v
           
       - run:
-          name: Build docker
-          command: docker-compose build iomhaigh-api iomhaigh-gui
+          name: Build docker gui
+          command: docker-compose build iomhaigh-gui
+
+      - run:
+          name: Build docker api
+          command: docker-compose build iomhaigh-api
 
       - run:
           name: Docker up
