@@ -17,7 +17,7 @@ services:
 
   iomhaigh-api:
     build: 
-        context: /iomhaigh-api/iomhaigh-api/
+        context: ./iomhaigh-api/iomhaigh-api/
         dockerfile: Dockerfile
     container_name: iomhaigh-api
     environment:
@@ -32,7 +32,7 @@ services:
 
   iomhaigh-gui:
     build: 
-        context: /iomhaigh-gui/
+        context: ./iomhaigh-gui/
         dockerfile: Dockerfile
     container_name: iomhaigh-gui
     ports:
