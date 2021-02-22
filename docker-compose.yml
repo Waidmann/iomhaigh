@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  iomhaigh-db:
+    image: "mysql:5.7"
+    container_name: iomhaigh-db
+    networks:
+      - isolated
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: iomhaigh
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+
+  iomhaigh-api:
+    build: ./iomhaigh-api/iomhaigh-api
+    container_name: iomhaigh-api
+    networks:
+      - isolated
+    environment:
+      - DB_SERVER=iomhaigh-db
+      - MYSQL_DATABASE=iomhaigh
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+    ports:
+      - 51394:51394
+    links:
+      - iomhaigh-db
+
+  iomhaigh-gui:
+    build: ./iomhaigh-gui
+    container_name: iomhaigh-gui
+    networks:
+      - isolated
+    ports:
+      - 80:80
+    links:
+      - iomhaigh-api
+
+
+volumes:
+  dbdata:
+  
+networks:
+  isolated:
+    internal:
+      name: iomhaigh-net
