@@ -8,15 +8,13 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-
-      - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
       
       - run:
           name: Build docker
           command: |
             docker-compose build iomhaigh-api iomhaigh-gui
+
+      - run:
+          name: Docker up
+          command: |
+            docker-compose up
