@@ -8,10 +8,14 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      
+      - run:
+          name: Install curl
+          command: apk update && apk add curl curl-dev bash
+
       - run:
           name: Does docker even exist
           command: docker -v
+          
       - run:
           name: Install docker-compose
           command: |
@@ -21,10 +25,8 @@ jobs:
 
       - run:
           name: Build docker
-          command: |
-            docker-compose build iomhaigh-api iomhaigh-gui
+          command: docker-compose build iomhaigh-api iomhaigh-gui
 
       - run:
           name: Docker up
-          command: |
-            docker-compose up
+          command: docker-compose up
